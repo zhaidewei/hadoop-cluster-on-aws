@@ -1,10 +1,6 @@
 
 
-variable "master_instance_type" {
-  default = "t2.medium"
-}
-
-variable "slave_instance_type" {
+variable "instance_type" {
   default = "t2.medium"
 }
 
@@ -50,6 +46,6 @@ echo -e "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAubchAqqikq/TB9q0HjYc+5
 echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5tyECqqKSr9MH2rQeNhz7l/NWXmdULuQmQi+H/HWZPOjFf2S/1Dxf8IayKm9jO/RfpOhSVunuFw7vTvwGMOnw/fO9LLFpQZaCDv4vlO8sGBv8UZfE12QV0IOPmyplqwFs0tnDCVf2SFamHPgFj/njt+7xbG0F5M7ki0O9k2x0wmw+INL6Ir2mQ/2IswhWsnRQ9nm9uS7X/1YefjNlOhhmtrxuiernA34WS6tGCyO5TkWhsnfdSQ0Bu4ho+pzkI2sFyMLhd98WCD9NLE5ssQWOuaMxKE3bnvtvw0hfyzKuWnhDa3jMKGfenv1dV0kaeH+trSmubeUkjKgxvFU8U5Mv hadoop@ip-172-31-35-116.eu-west-1.compute.internal" > /home/hadoop/.ssh/id_rsa.pub
 cp /home/hadoop/.ssh/id_rsa.pub /home/hadoop/.ssh/authorized_keys
 chmod 600 /home/hadoop/.ssh/authorized_keys
-
+chown hadoop:hadoop /home/hadoop/.ssh/authorized_keys
 EOF
 }

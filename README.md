@@ -8,7 +8,6 @@ Terraform v0.12.19
 
 ```bash
 aws-vault create dewei
-
 ```
 
 Input IAM user secret.
@@ -32,4 +31,8 @@ aws-vault exec dewei terraform apply
 aws-vault exec dewei terraform destroy
 ```
 
-###
+### Use terraform output to show public DNS
+
+```bash
+terraform output
+```
