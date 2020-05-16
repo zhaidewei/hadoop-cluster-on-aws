@@ -1,8 +1,8 @@
 provider "aws" {
-    region                  = "eu-west-1"
-    version                 = "~> 2.19.0"
-    shared_credentials_file = "/Users/deweizhai/.aws/credentials"
-    profile                 = "dewei"
+  region                  = "eu-west-1"
+  version                 = "~> 2.19.0"
+  shared_credentials_file = "/Users/deweizhai/.aws/credentials"
+  profile                 = "dewei"
 }
 
 # masternode
@@ -13,11 +13,11 @@ resource "aws_instance" "node01" {
   ami           = var.aws_ami
 
   # Authentication
-  key_name = var.keyPair
+  key_name = var.key_pair
 
   # Network / security config
   associate_public_ip_address = true
-  security_groups = ["hadoop_cluster", "Remote Access Hadoop Cluster"]
+  security_groups             = ["hadoop_cluster", "Remote Access Hadoop Cluster"]
 
   root_block_device {
     volume_size = 8
@@ -25,11 +25,12 @@ resource "aws_instance" "node01" {
   }
   # extra block devices
   ebs_block_device {
-    device_name = "/dev/xvdb"
+    device_name = "/dev/sdb"
     volume_size = 8
     volume_type = "gp2"
   }
 
+  user_data = var.initialize_script
 }
 
 resource "aws_instance" "node02" {
@@ -39,11 +40,11 @@ resource "aws_instance" "node02" {
   ami           = var.aws_ami
 
   # Authentication
-  key_name = var.keyPair
+  key_name = var.key_pair
 
   # Network / security config
   associate_public_ip_address = true
-  security_groups = ["hadoop_cluster", "Remote Access Hadoop Cluster"]
+  security_groups             = ["hadoop_cluster", "Remote Access Hadoop Cluster"]
 
   root_block_device {
     volume_size = 8
@@ -55,6 +56,8 @@ resource "aws_instance" "node02" {
     volume_size = 8
     volume_type = "gp2"
   }
+
+  user_data = var.initialize_script
 }
 
 resource "aws_instance" "node03" {
@@ -64,11 +67,11 @@ resource "aws_instance" "node03" {
   ami           = var.aws_ami
 
   # Authentication
-  key_name = var.keyPair
+  key_name = var.key_pair
 
   # Network / security config
   associate_public_ip_address = true
-  security_groups = ["hadoop_cluster", "Remote Access Hadoop Cluster"]
+  security_groups             = ["hadoop_cluster", "Remote Access Hadoop Cluster"]
 
   root_block_device {
     volume_size = 8
@@ -80,5 +83,7 @@ resource "aws_instance" "node03" {
     volume_size = 8
     volume_type = "gp2"
   }
+
+  user_data = var.initialize_script
 
 }
