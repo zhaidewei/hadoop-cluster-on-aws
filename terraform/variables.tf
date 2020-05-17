@@ -42,12 +42,12 @@ mkdir /kkb
 mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04d838ce.efs.eu-west-1.amazonaws.com:/ /efs
 ln -s /efs /kkb/soft
 
+mkdir  /kkb/install
 tar -xzvf /kkb/soft/$cdh.tar.gz -C /kkb/install/
-
-mkdir -p /kkb/install/$cdh/hadoopDatas
 
 # data volume mounts
 mkfs -t xfs /dev/xvdb
+mkdir -p /kkb/install/$cdh/hadoopDatas
 mount /dev/xvdb /kkb/install/$cdh/hadoopDatas
 
 mkdir -p /kkb/install/$cdh/hadoopDatas/tempDatas
