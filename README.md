@@ -23,9 +23,24 @@ provider "aws" {
 terraform output
 ```
 
+Public DNS is used for SSH.
+
+
 ## Build process
 
 Launch target is a 3 node cluster which unmanaged CDH 5.12 will be deployed upon.
+
+### Step1 Spin up cluster
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+### Step2 Manual works
+
+Config /etc/hosts, see [this](#ssh-between-nodes-in-cluster)
 
 ## SSH from local
 
@@ -48,7 +63,6 @@ Two configs at each node is needed, we do it in the boostrap script (at tf var `
 2. Use same id_rsa key and pub key at every node and use the pub key as authorized keys
 
 One work is also needed to update the local route table `/etc/hosts`
-
 
 This however is still a manual work.
 
