@@ -48,5 +48,24 @@ Two configs at each node is needed, we do it in the boostrap script (at tf var `
 2. Use same id_rsa key and pub key at every node and use the pub key as authorized keys
 
 One work is also needed to update the local route table `/etc/hosts`
+
+
 This however is still a manual work.
-But we can do it with the help of `xsync.sh` script.
+
+1. Run `terraform output` shows the content to be added.
+
+```bash
+cluster_route_table = [
+  "172.31.44.245 ip-172-31-44-245.eu-west-1.compute.internal node01",
+  "172.31.32.68 ip-172-31-32-68.eu-west-1.compute.internal node02",
+  "172.31.44.127 ip-172-31-44-127.eu-west-1.compute.internal node03",
+]
+```
+
+2. Use root user to run the this command to update `/etc/hosts` on every node.
+
+```bash
+echo "172.31.44.245 ip-172-31-44-245.eu-west-1.compute.internal node01" >> /etc/hosts
+echo "172.31.32.68 ip-172-31-32-68.eu-west-1.compute.internal node02" >> /etc/hosts
+echo "172.31.44.127 ip-172-31-44-127.eu-west-1.compute.internal node03" >> /etc/hosts
+```
