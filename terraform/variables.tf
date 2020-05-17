@@ -21,6 +21,7 @@ variable "initialize_script" {
 yum update -y
 yum install -y nfs-utils
 yum install -y ntp
+yum install -y wget
 
 # users
 useradd hadoop
@@ -31,7 +32,6 @@ useradd hdfs
 mkdir /data
 chown hdfs /data
 mkdir /efs
-mkdir /home/java
 
 # Mounts
 mkfs -t xfs /dev/xvdb
@@ -49,7 +49,6 @@ hwclock --systohc
 setenforce 0
 
 # Installs from NFS
-cd /home/java/
 rpm -ivh /efs/jdk-8u181-linux-x64.rpm
 
 # Allow SSH to each others
@@ -61,5 +60,11 @@ echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5tyECqqKSr9MH2rQeNhz7l/NWXmdULuQ
 cp /home/hadoop/.ssh/id_rsa.pub /home/hadoop/.ssh/authorized_keys
 chmod 600 /home/hadoop/.ssh/authorized_keys
 chown hadoop:hadoop /home/hadoop/.ssh/authorized_keys
+
+# Update /etc/profiles
+echo -e "export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))" >> /etc/profile
+echo "export PATH=\$PATH:\$JAVA_HOME/bin" >> /etc/profile
+echo "export CLASSPATH=.:\$JAVA_HOME/jre/lib:\$JAVA_HOME/lib:\$JAVA_HOME/lib/tools.jar" >> /etc/profile
+
 EOF
 }

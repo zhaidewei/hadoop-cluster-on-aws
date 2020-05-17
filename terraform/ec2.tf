@@ -2,7 +2,7 @@ provider "aws" {
   region                  = "eu-west-1"
   version                 = "~> 2.19.0"
   shared_credentials_file = "/Users/deweizhai/.aws/credentials"
-  profile                 = "dewei"
+  profile                 = "default"
 }
 
 # cluster
@@ -34,7 +34,6 @@ resource "aws_instance" "cluster" {
 
   user_data = var.initialize_script
 }
-
 
 resource "null_resource" "etc_hosts_file" {
   triggers = {
