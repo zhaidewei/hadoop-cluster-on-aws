@@ -83,10 +83,12 @@ echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /etc/profile
 
 # Use predefined files to update
 
-for file in hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml slaves
+for file in hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml slaves yarn-env.sh
 do
 sudo -u hadoop cp /efs/$file /kkb/install/$cdh/etc/hadoop/$file
 done
+
+chmod 755 /kkb/install/$cdh/etc/hadoop/*.sh
 
 # Allow SSH to each others
 sudo su hadoop
