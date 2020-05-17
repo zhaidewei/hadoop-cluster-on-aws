@@ -17,28 +17,42 @@ variable "key_pair" {
 variable "initialize_script" {
   default = <<EOF
 #!/bin/bash
-mkfs -t xfs /dev/xvdb
-mkdir /data
-chown hdfs /data
-mount /dev/xvdb /data
 
-sed -i "s/#PubkeyAuthentication yes/PubkeyAuthentication yes/" /etc/ssh/sshd_config
-systemctl restart sshd.service
-
+yum update -y
+yum install -y nfs-utils
 yum install -y ntp
 
-systemctl start ntpd
-systemctl enable ntpd
-
-ntpdate -u 169.254.169.123 # aws ntp server
-
-sudo hwclock --systohc
-
-useradd hdfs
-setenforce 0
-
+# users
 useradd hadoop
 echo "hadoop:123456" | sudo chpasswd
+useradd hdfs
+
+# dirs
+mkdir /data
+chown hdfs /data
+mkdir /efs
+mkdir /home/java
+
+# Mounts
+mkfs -t xfs /dev/xvdb
+mount /dev/xvdb /data
+mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04d838ce.efs.eu-west-1.amazonaws.com:/ /efs
+
+
+# Sysconfig
+sed -i "s/#PubkeyAuthentication yes/PubkeyAuthentication yes/" /etc/ssh/sshd_config
+systemctl restart sshd.service
+systemctl start ntpd
+systemctl enable ntpd
+ntpdate -u 169.254.169.123 # aws ntp server
+hwclock --systohc
+setenforce 0
+
+# Installs from NFS
+cd /home/java/
+rpm -ivh /efs/jdk-8u181-linux-x64.rpm
+
+# Allow SSH to each others
 sudo su hadoop
 cd /home/hadoop
 echo -e "\n\n\n" | sudo -u hadoop ssh-keygen -t rsa -P ""
