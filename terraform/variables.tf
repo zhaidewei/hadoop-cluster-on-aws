@@ -46,6 +46,9 @@ ln -s /efs /kkb/soft
 mkdir  /kkb/install
 tar -xzvf /kkb/soft/$cdh.tar.gz -C /kkb/install/
 
+mkdir /kkb/compile
+tar -xzvf /kkb/soft/apache-maven-3.0.5-bin.tar.gz -C /kkb/compile
+
 # data volume mounts
 mkfs -t xfs /dev/xvdb
 mkdir -p /kkb/install/$cdh/hadoopDatas
@@ -80,6 +83,10 @@ echo "export CLASSPATH=.:\$JAVA_HOME/jre/lib:\$JAVA_HOME/lib:\$JAVA_HOME/lib/too
 
 echo -e "export HADOOP_HOME=/kkb/install/$cdh" >> /etc/profile
 echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /etc/profile
+
+echo "export MAVEN_HOME=/kkb/compile/apache-maven-3.0.5" >> /etc/profile
+echo "export MAVEN_OPTS=\"-Xms4096m -Xmx4096m\"" >> /etc/profile
+echo "export PATH=\$PATH:\$MAVEN_HOME/bin" >> /etc/profile
 
 # Use predefined files to update
 
