@@ -22,6 +22,7 @@ yum install -y nfs-utils
 yum install -y ntp
 yum install -y wget
 yum install -y openssl-devel
+yum install -y git
 
 # Users
 useradd hadoop
@@ -88,7 +89,7 @@ echo "export MAVEN_HOME=/kkb/compile/apache-maven-3.0.5" >> /etc/profile
 echo "export MAVEN_OPTS=\"-Xms4096m -Xmx4096m\"" >> /etc/profile
 echo "export PATH=\$PATH:\$MAVEN_HOME/bin" >> /etc/profile
 
-# Use predefined files to update
+# Use predefinefiles to update
 
 for file in hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml slaves yarn-env.sh
 do
@@ -108,6 +109,11 @@ chmod 600 /home/hadoop/.ssh/authorized_keys
 chmod 600 /home/hadoop/.ssh/id_rsa
 chmod 644 /home/hadoop/.ssh/id_rsa.pub
 chown -R hadoop:hadoop /home/hadoop/.ssh
+
+# bug fix maven. The default repo should use https not http.
+mkdir /home/hadoop/.m2
+chmod 775 /home/hadoop/.m2
+cp /kkb/soft/settings.xml /home/hadoop/.m2
 
 EOF
 }
