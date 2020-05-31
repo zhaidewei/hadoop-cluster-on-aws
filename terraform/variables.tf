@@ -54,6 +54,9 @@ tar -xzvf /kkb/soft/apache-maven-3.0.5-bin.tar.gz -C /kkb/compile
 mkfs -t xfs /dev/xvdb
 mkdir -p /kkb/install/$cdh/hadoopDatas
 mount /dev/xvdb /kkb/install/$cdh/hadoopDatas
+# Config auto mount
+echo -e "UUID=$(blkid /dev/xvdb -o value | head -n 1) /kkb/install/$cdh/hadoopDatas xfs defaults,nofail 0 2" >> /etc/fstab
+
 
 mkdir -p /kkb/install/$cdh/hadoopDatas/tempDatas
 mkdir -p /kkb/install/$cdh/hadoopDatas/namenodeDatas
