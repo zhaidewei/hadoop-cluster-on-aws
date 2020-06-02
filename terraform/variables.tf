@@ -71,6 +71,16 @@ mkdir -p /kkb/install/$cdh/hadoopDatas/dfs/data
 
 chown -R hadoop:hadoop /kkb
 
+mkdir -p /kkb/install/$cdh/hadoopDatas/nm-local-dir
+mkdir -p /kkb/install/$cdh/hadoopDatas/userlogs
+
+chmod 755 /kkb/install/$cdh/hadoopDatas/nm-local-dir
+chmod 755 /kkb/install/$cdh/hadoopDatas/userlogs
+
+chown yarn:yarn /kkb/install/$cdh/hadoopDatas/nm-local-dir
+chown yarn:yarn /kkb/install/$cdh/hadoopDatas/userlogs
+
+
 
 # Sysconfig
 sed -i "s/#PubkeyAuthentication yes/PubkeyAuthentication yes/" /etc/ssh/sshd_config
