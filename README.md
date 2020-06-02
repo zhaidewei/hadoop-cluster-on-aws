@@ -134,3 +134,17 @@ I use a script to sync between local and hadoop home in the namenode node.
 
 rsync -va --delete --exclude ".git" --exclude ".idea" $1  $2:/home/hadoop
 ```
+
+## Firewall and local configs
+
+In AWS, I used a security group to whilte list my home ip to be able to scp to the cluster at all port range.
+
+In `/etc/hosts` I configured the public ip to point to private dns and private hostnames.
+
+Example:
+
+```bash
+34.243.182.223 ip-172-31-14-244.eu-west-1.compute.internal node01
+34.245.2.180 ip-172-31-12-21.eu-west-1.compute.internal node02
+34.243.129.73 ip-172-31-5-55.eu-west-1.compute.internal node03
+```
