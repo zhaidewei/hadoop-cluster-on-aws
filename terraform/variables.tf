@@ -31,6 +31,13 @@ echo "hadoop ALL=(ALL)    ALL" >> /etc/sudoers
 useradd hdfs
 usermod -a -G hadoop hdfs
 
+sudo useradd mapred
+sudo usermod -a -G hadoop mapred
+
+sudo useradd yarn
+sudo usermod -a -G hadoop yarn
+
+
 # cdh version
 export cdh=hadoop-2.6.0-cdh5.14.4
 
@@ -96,7 +103,7 @@ echo "export PATH=\$PATH:\$MAVEN_HOME/bin" >> /etc/profile
 
 for file in hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml slaves yarn-env.sh
 do
-sudo -u hadoop cp /efs/$file /kkb/install/$cdh/etc/hadoop/$file
+sudo -u hadoop cp /efs/hadoop-cluster-on-aws/configs/$file /kkb/install/$cdh/etc/hadoop/$file
 done
 
 chmod 755 /kkb/install/$cdh/etc/hadoop/*.sh
