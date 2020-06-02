@@ -15,15 +15,4 @@
         <name>mapreduce.jobhistory.webapp.address</name>
         <value>node01:19888</value>
     </property>
-
-<property>
-    <name>hadoop.proxyuser.mapred.groups</name>
-    <value>*</value>
-</property>
-
-
-<property>
-    <name>hadoop.proxyuser.mapred.hosts</name>
-    <value>*</value>
-</property>
 </configuration>

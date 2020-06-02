@@ -15,4 +15,14 @@
         <name>fs.trash.interval</name>
         <value>10080</value>
     </property>
+
+    <property>
+        <name>hadoop.proxyuser.mapred.groups</name>
+        <value>*</value>
+    </property>
+
+    <property>
+        <name>hadoop.proxyuser.mapred.hosts</name>
+        <value>*</value>
+    </property>
 </configuration>
