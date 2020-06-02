@@ -123,6 +123,7 @@ chown -R hadoop:hadoop /home/hadoop/.ssh
 
 cd /efs/hadoop-cluster-on-aws && git pull # Update config files
 
+export cdh=hadoop-2.6.0-cdh5.14.4
 for file in hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml slaves yarn-env.sh
 do
 cp /efs/hadoop-cluster-on-aws/configs/$file /kkb/install/$cdh/etc/hadoop/$file
