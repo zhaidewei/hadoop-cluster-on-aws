@@ -102,10 +102,6 @@ echo "export CLASSPATH=.:\$JAVA_HOME/jre/lib:\$JAVA_HOME/lib:\$JAVA_HOME/lib/too
 echo -e "export HADOOP_HOME=/kkb/install/$cdh" >> /etc/profile
 echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /etc/profile
 
-echo "export MAVEN_HOME=/kkb/compile/apache-maven-3.0.5" >> /etc/profile
-echo "export MAVEN_OPTS=\"-Xms4096m -Xmx4096m\"" >> /etc/profile
-echo "export PATH=\$PATH:\$MAVEN_HOME/bin" >> /etc/profile
-
 # Allow SSH to each others
 sudo su hadoop
 mkdir /home/hadoop/.ssh

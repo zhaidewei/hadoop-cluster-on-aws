@@ -41,7 +41,7 @@ terraform apply
 ### Step2 Manual works
 
 1. Config /etc/hosts, see [this](#ssh-between-nodes-in-cluster)
-2. **Onetime** Run `hdfs format` as user hadoop.
+2. **Onetime** Run `hdfs namenode format` as user hadoop.
 3. **Onetime** After HDFS is running, run below command to create staging dirs for yarn.
 
 ```bash
