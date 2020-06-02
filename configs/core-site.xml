@@ -7,12 +7,10 @@
         <name>hadoop.tmp.dir</name>
         <value>/kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/tempDatas</value>
     </property>
-    <!-- 缓冲区大小，实际工作中根据服务器性能动态调整 -->
     <property>
         <name>io.file.buffer.size</name>
         <value>4096</value>
     </property>
-    <!-- 开启hdfs的垃圾桶机制，删除掉的数据可以从垃圾桶中回收，单位分钟 -->
     <property>
         <name>fs.trash.interval</name>
         <value>10080</value>

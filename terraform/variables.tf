@@ -58,16 +58,16 @@ tar -xzvf /kkb/soft/$cdh.tar.gz -C /kkb/install/
 mkfs -t xfs /dev/xvdb
 mkdir -p /kkb/install/$cdh/hadoopDatas
 mount /dev/xvdb /kkb/install/$cdh/hadoopDatas
+
 # Config auto mount
 echo -e "UUID=$(blkid /dev/xvdb -o value | head -n 1) /kkb/install/$cdh/hadoopDatas xfs defaults,nofail 0 2" >> /etc/fstab
 
+# Set according to default value assuming $hadoop.tmp.dir=/kkb/install/$cdh/hadoopDatas
 
 mkdir -p /kkb/install/$cdh/hadoopDatas/tempDatas
-mkdir -p /kkb/install/$cdh/hadoopDatas/namenodeDatas
-mkdir -p /kkb/install/$cdh/hadoopDatas/datanodeDatas
-mkdir -p /kkb/install/$cdh/hadoopDatas/dfs/nn/edits
-mkdir -p /kkb/install/$cdh/hadoopDatas/dfs/snn/name
-mkdir -p /kkb/install/$cdh/hadoopDatas/dfs/nn/snn/edits
+mkdir -p /kkb/install/$cdh/hadoopDatas/dfs/name
+mkdir -p /kkb/install/$cdh/hadoopDatas/dfs/namesecondary
+mkdir -p /kkb/install/$cdh/hadoopDatas/dfs/data
 
 chown -R hadoop:hadoop /kkb
 

@@ -20,24 +20,24 @@
 	</property>
 	<property>
 		<name>dfs.namenode.name.dir</name>
-		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/namenodeDatas</value>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/name</value>
 	</property>
 	<!-- 定义dataNode数据存储的节点位置，实际工作中，一般先确定磁盘的挂载目录，然后多个目录用，进行分割 -->
 	<property>
 		<name>dfs.datanode.data.dir</name>
-		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/datanodeDatas</value>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/data</value>
 	</property>
 	<property>
 		<name>dfs.namenode.edits.dir</name>
-		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/nn/edits</value>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/name</value>
 	</property>
 	<property>
 		<name>dfs.namenode.checkpoint.dir</name>
-		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/snn/name</value>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/namesecondary</value>
 	</property>
 	<property>
 		<name>dfs.namenode.checkpoint.edits.dir</name>
-		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/nn/snn/edits</value>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/namesecondary</value>
 	</property>
 	<property>
 		<name>dfs.replication</name>
