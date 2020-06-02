@@ -99,15 +99,6 @@ echo "export MAVEN_HOME=/kkb/compile/apache-maven-3.0.5" >> /etc/profile
 echo "export MAVEN_OPTS=\"-Xms4096m -Xmx4096m\"" >> /etc/profile
 echo "export PATH=\$PATH:\$MAVEN_HOME/bin" >> /etc/profile
 
-# Use predefinefiles to update
-
-for file in hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml slaves yarn-env.sh
-do
-sudo -u hadoop cp /efs/hadoop-cluster-on-aws/configs/$file /kkb/install/$cdh/etc/hadoop/$file
-done
-
-chmod 755 /kkb/install/$cdh/etc/hadoop/*.sh
-
 # Allow SSH to each others
 sudo su hadoop
 mkdir /home/hadoop/.ssh
@@ -121,6 +112,17 @@ chmod 600 /home/hadoop/.ssh/authorized_keys
 chmod 600 /home/hadoop/.ssh/id_rsa
 chmod 644 /home/hadoop/.ssh/id_rsa.pub
 chown -R hadoop:hadoop /home/hadoop/.ssh
+
+# Copy update config files to etc/hadoop
+
+cd /efs/hadoop-cluster-on-aws && git pull # Update config files
+
+for file in hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml slaves yarn-env.sh
+do
+cp /efs/hadoop-cluster-on-aws/configs/$file /kkb/install/$cdh/etc/hadoop/$file
+done
+chmod 755 /kkb/install/$cdh/etc/hadoop/*.sh
+
 
 # bug fix maven. The default repo should use https not http.
 mkdir /home/hadoop/.m2
