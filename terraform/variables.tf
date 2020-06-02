@@ -102,6 +102,9 @@ echo "export CLASSPATH=.:\$JAVA_HOME/jre/lib:\$JAVA_HOME/lib:\$JAVA_HOME/lib/too
 echo -e "export HADOOP_HOME=/kkb/install/$cdh" >> /etc/profile
 echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /etc/profile
 
+echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> /etc/profile
+echo "export HADOOP_YARN_HOME=\$HADOOP_HOME" >> /etc/profile
+
 # Allow SSH to each others
 sudo su hadoop
 mkdir /home/hadoop/.ssh

@@ -9,7 +9,18 @@
     </property>
     <property>
         <name>yarn.application.classpath</name>name>
-        <value>$HADOOP_CONF_DIR,$HADOOP_COMMON_HOME/*,$HADOOP_COMMON_HOME/lib/*,$HADOOP_HDFS_HOME/*,$HADOOP_HDFS_HOME/lib/*,$HADOOP_MAPRED_HOME/*,$HADOOP_MAPRED_HOME/lib/*,$HADOOP_YARN_HOME/*,$HADOOP_YARN_HOME/lib/*</value>
+        <!-- <value>$HADOOP_CONF_DIR,$HADOOP_COMMON_HOME/*,$HADOOP_COMMON_HOME/lib/*,$HADOOP_HDFS_HOME/*,$HADOOP_HDFS_HOME/lib/*,$HADOOP_MAPRED_HOME/*,$HADOOP_MAPRED_HOME/lib/*,$HADOOP_YARN_HOME/*,$HADOOP_YARN_HOME/lib/*</value> -->
+        <value>
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/etc/hadoop,
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/share/hadoop/common/*,
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/share/hadoop/common/lib/*,
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/share/hadoop/hdfs/*,
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/share/hadoop/hdfs/lib/*,
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/share/hadoop/mapreduce2/*,
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/share/hadoop/mapreduce2/lib/*,
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/share/hadoop/yarn/*,
+            /kkb/install/hadoop-2.6.0-cdh5.14.4/share/hadoop/yarn/lib/*
+        </value>>
     </property>
     <property>
         <name>yarn.log.aggregation-enable</name>
