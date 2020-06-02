@@ -40,7 +40,25 @@ terraform apply
 
 ### Step2 Manual works
 
-Config /etc/hosts, see [this](#ssh-between-nodes-in-cluster)
+1. Config /etc/hosts, see [this](#ssh-between-nodes-in-cluster)
+2. **Onetime** Run `hdfs format` as user hadoop.
+3. **Onetime** After HDFS is running, run below command to create staging dirs for yarn.
+
+```bash
+sudo -u hdfs dfs -mkdir -p /user/history
+sudo -u hdfs dfs -chmod -R 1777 /user/history
+sudo -u hdfs dfs -chown mapred:hadoop /user/history
+```
+
+4. **One time** Create `/tmp` in hdfs
+
+```bash
+sudo -u hdfs dfs -mkdir /tmp
+sudo -u hdfs dfs -chmod -R 1777 /tmp
+```
+
+5. Only after reboot & optional, run `mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04d838ce.efs.eu-west-1.amazonaws.com:/ /efs` to mount nfs.
+
 
 ## SSH from local
 
