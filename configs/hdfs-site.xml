@@ -1,0 +1,55 @@
+<configuration>
+	<!-- NameNode存储元数据信息的路径，实际工作中，一般先确定磁盘的挂载目录，然后多个目录用，进行分割   -->
+	<!--   集群动态上下线
+	<property>
+		<name>dfs.hosts</name>
+		<value>/kkb/install/hadoop-2.6.0-cdh5.14.4/etc/hadoop/accept_host</value>
+	</property>
+	<property>
+		<name>dfs.hosts.exclude</name>
+		<value>/kkb/install/hadoop-2.6.0-cdh5.14.4/etc/hadoop/deny_host</value>
+	</property>
+	-->
+	<property>
+		<name>dfs.namenode.secondary.http-address</name>
+		<value>node01:50090</value>
+	</property>
+	<property>
+		<name>dfs.namenode.http-address</name>
+		<value>node01:50070</value>
+	</property>
+	<property>
+		<name>dfs.namenode.name.dir</name>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/namenodeDatas</value>
+	</property>
+	<!-- 定义dataNode数据存储的节点位置，实际工作中，一般先确定磁盘的挂载目录，然后多个目录用，进行分割 -->
+	<property>
+		<name>dfs.datanode.data.dir</name>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/datanodeDatas</value>
+	</property>
+	<property>
+		<name>dfs.namenode.edits.dir</name>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/nn/edits</value>
+	</property>
+	<property>
+		<name>dfs.namenode.checkpoint.dir</name>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/snn/name</value>
+	</property>
+	<property>
+		<name>dfs.namenode.checkpoint.edits.dir</name>
+		<value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/dfs/nn/snn/edits</value>
+	</property>
+	<property>
+		<name>dfs.replication</name>
+		<value>3</value>
+	</property>
+	<property>
+		<name>dfs.permissions</name>
+		<value>false</value>
+	</property>
+	<property>
+		<name>dfs.blocksize</name>
+		<value>134217728</value>
+	</property>
+</configuration>
+
