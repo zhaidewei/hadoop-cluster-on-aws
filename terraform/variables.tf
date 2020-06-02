@@ -54,9 +54,6 @@ ln -s /efs /kkb/soft
 mkdir  /kkb/install
 tar -xzvf /kkb/soft/$cdh.tar.gz -C /kkb/install/
 
-mkdir /kkb/compile
-tar -xzvf /kkb/soft/apache-maven-3.0.5-bin.tar.gz -C /kkb/compile
-
 # data volume mounts
 mkfs -t xfs /dev/xvdb
 mkdir -p /kkb/install/$cdh/hadoopDatas
@@ -122,12 +119,6 @@ do
 cp /efs/hadoop-cluster-on-aws/configs/$file /kkb/install/$cdh/etc/hadoop/$file
 done
 chmod 755 /kkb/install/$cdh/etc/hadoop/*.sh
-
-
-# bug fix maven. The default repo should use https not http.
-mkdir /home/hadoop/.m2
-chmod 775 /home/hadoop/.m2
-cp /kkb/soft/settings.xml /home/hadoop/.m2
 
 EOF
 }
