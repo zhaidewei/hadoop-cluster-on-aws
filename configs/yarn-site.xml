@@ -55,4 +55,37 @@
         <value>100</value>
     </property>
 
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</value>
+    </property>
+
+    <!--  指定我们的任务调度的配置文件路径  -->
+    <property>
+        <name>yarn.scheduler.fair.allocation.file</name>
+        <value>/kkb/install/hadoop-2.6.0-cdh5.14.4/etc/hadoop/fair-scheduler.xml</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.fair.preemption</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.fair.preemption.cluster-utilization-threshold</name>
+        <value>0.8f</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.fair.user-as-default-queue</name>
+        <value>true</value>
+        <description>default is True</description>
+    </property>
+
+    <!-- 如果提交一个任务没有到任何的队列，是否允许创建一个新的队列，设置false不允许  -->
+    <property>
+        <name>yarn.scheduler.fair.allow-undeclared-pools</name>
+        <value>false</value>
+        <description>default is True</description>
+    </property>
+
 </configuration>
