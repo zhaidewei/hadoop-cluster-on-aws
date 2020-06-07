@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<allocations>
+    <!-- 每个队列中，app的默认调度策略，默认值是fair -->
+    <defaultQueueSchedulingPolicy>fair</defaultQueueSchedulingPolicy>
+
+    <user name="hadoop">
+        <!-- 用户hadoop最多运行的app个数 -->
+        <maxRunningApps>30</maxRunningApps>
+    </user>
+    <!-- 如果用户没有设置最多运行的app个数，那么用户默认运行10个 -->
+    <userMaxAppsDefault>10</userMaxAppsDefault>
+
+    <!-- 定义我们的队列  -->
+    <!--
+    weight
+    资源池权重
+
+    aclSubmitApps
+    允许提交任务的用户名和组；
+    格式为： 用户名 用户组
+    当有多个用户时候，格式为：用户名1,用户名2 用户名1所属组,用户名2所属组
+
+    aclAdministerApps
+    允许管理任务的用户名和组；
+    格式同上。
+     -->
+    <queue name="root">
+        <minResources>512mb,4vcores</minResources>
+        <maxResources>18432mb,22vcores</maxResources>
+        <maxRunningApps>50</maxRunningApps>
+        <weight>1.0</weight>
+        <schedulingMode>fair</schedulingMode>
+        <aclSubmitApps> </aclSubmitApps>
+        <aclAdministerApps> </aclAdministerApps>
+
+        <queue name="default">
+            <minResources>512mb,4vcores</minResources>
+            <maxResources>9216mb,11vcores</maxResources>
+            <maxRunningApps>25</maxRunningApps>
+            <schedulingMode>fair</schedulingMode>
+            <weight>1.0</weight>
+            <!--  所有的任务如果不指定任务队列，都提交到default队列里面来 -->
+            <aclSubmitApps>*</aclSubmitApps>
+        </queue>
+
+        <queue name="hadoop">
+            <minResources>512mb,4vcores</minResources>
+            <maxResources>9216mb,11vcores</maxResources>
+            <maxRunningApps>25</maxRunningApps>
+            <schedulingMode>fair</schedulingMode>
+            <weight>1.0</weight>
+            <aclSubmitApps>hadoop hadoop</aclSubmitApps>
+            <aclAdministerApps>hadoop hadoop</aclAdministerApps>
+        </queue>
+    </queue>
+    <!-- 包含一系列的rule元素；这些rule元素用来告诉scheduler调度器，进来的app按照规则提交到哪个队列中
+        有多个rule的话，会从上到下进行匹配；
+        rule可能会带有argument；所有的rule都带有create argument，表示当前rule是否能够创建一个新队列；默认值是true
+
+    -->
+    <queuePlacementPolicy>
+        <!-- app被提交到指定的队列；如果队列不存在，则不创建 -->
+        <rule name="specified" create="false"/>
+        <!-- app被提交到提交此app的用户所属组的组名命名的队列；如果队列不存在，则不创建 -->
+        <rule name="primaryGroup" create="false" />
+        <!-- 如果上边的rule都没有匹配上，则app提交到一下队列；如果没有指定queue值，默认值是root.default -->
+        <rule name="default" queue="root.default"/>
+    </queuePlacementPolicy>
+</allocations>
