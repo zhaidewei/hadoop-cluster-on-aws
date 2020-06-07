@@ -28,6 +28,16 @@
     </property>
 
     <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>604800</value><!--7 day-->
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.log-aggregation.compression-type</name>
+        <value>gz</value>
+    </property>
+
+    <property>
         <name>yarn.nodemanager.local-dirs</name>
         <value>file:///kkb/install/hadoop-2.6.0-cdh5.14.4/hadoopDatas/nm-local-dir</value>
     </property>
@@ -38,6 +48,11 @@
     <property>
         <name>yarn.nodemanager.remote-app-log-dir</name>
         <value>hdfs://node01:8020/var/log/hadoop-yarn/apps</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.max-completed-applications</name>
+        <value>100</value>
     </property>
 
 </configuration>
