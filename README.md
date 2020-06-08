@@ -2,6 +2,10 @@
 
 Setup my own Hadoop cluster on AWS Ec2
 
+## TODOs
+
+Use different instance type for node01 and node02~03. node01 runs as Namenode and RM, it requires more cpu and memory than other data nodes.
+
 ## Terraform
 
 Terraform v0.12.19.
@@ -25,6 +29,35 @@ terraform output
 
 Public DNS is used for SSH.
 
+## pre downloaded files
+
+Some installation files are big so I downloaded them to an nfs system (AWS EFS) and mount to the nodes to use.
+
+`wget http://archive.cloudera.com/cdh5/cdh/5/hive-1.1.0-cdh5.14.4.tar.gz`
+
+Overview of all files
+
+```bash
+-rwxrwxrwx. 1 root   root     5144659 Feb 19  2013 apache-maven-3.0.5-bin.tar.gz
+-rw-r--r--. 1 root   root         324 Dec 13  2018 cloudera-cdh5.repo
+-rw-r--r--. 1 root   root         672 May 17 20:07 core-site.xml
+-rwxrwxrwx. 1 root   root   433914863 Jul 12  2018 hadoop-2.6.0-cdh5.14.4.tar.gz
+drwxr-xr-x. 5 hadoop hadoop      6144 Jun  7 09:06 hadoop-cluster-on-aws
+-rwxr-xr-x. 1 root   root        4240 May 17 21:59 hadoop-env.sh
+-rw-r--r--. 1 root   root        1819 May 17 20:09 hdfs-site.xml
+-rwxr-xr-x. 1 root   root   128534546 Jul 12  2018 hive-1.1.0-cdh5.14.4.tar.gz
+-rwxr-xr-x. 1 root   root        2230 May 17 21:14 httpfs-env.sh
+-rwxrwxrwx. 1 centos centos 170023183 May 17 08:26 jdk-8u181-linux-x64.rpm
+-rwxr-xr-x. 1 root   root        3139 May 17 21:14 kms-env.sh
+-rwxr-xr-x. 1 root   root        1384 May 17 21:14 mapred-env.sh
+-rw-r--r--. 1 hadoop hadoop       675 Jun  2 12:48 mapred-site.xml
+-rw-r--r--. 1 root   root       25548 Apr  7  2017 mysql57-community-release-el7-10.noarch.rpm
+-rw-r--r--. 1 hadoop hadoop       229 May 26 22:13 settings.xml
+-rw-r--r--. 1 root   root          22 May 17 20:10 slaves
+-rwxrwxrwx. 1 root   root         481 May 17 18:17 xsync
+-rwxr-xr-x. 1 root   root        4568 May 17 21:14 yarn-env.sh
+-rw-r--r--. 1 root   root         268 May 17 20:09 yarn-site.xml
+```
 
 ## Build process
 
@@ -54,6 +87,30 @@ hdfs dfs -chmod -R 1777 /tmp
 ```
 
 4. Only after reboot & optional, run `mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04d838ce.efs.eu-west-1.amazonaws.com:/ /efs` to mount nfs.
+
+5. We only need to install mysql at node03.
+
+```bash
+cd /kkb/soft/
+wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
+yum -y install mysql57-community-release-el7-10.noarch.rpm
+yum -y install mysql-community-server
+systemctl start mysqld.service
+grep "password" /var/log/mysqld.log
+mysql -uroot -p
+set global validate_password_policy=LOW;
+set global validate_password_length=6;
+ALTER USER '<our defalut user>'@'localhost' IDENTIFIED BY '<ourdefault password>';
+grant all privileges  on  *.* to '<our defalut user>'@'%' identified by '<ourdefault password>' with grant option;
+flush privileges;
+```
+
+6. Install hive server to node03
+
+```bash
+tar -xzvf hive-1.1.0-cdh5.14.4.tar.gz -C /kkb/install
+```
+
 
 
 ## SSH from local

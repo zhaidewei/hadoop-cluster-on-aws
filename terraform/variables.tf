@@ -23,6 +23,7 @@ yum install -y ntp
 yum install -y wget
 yum install -y openssl-devel
 yum install -y git
+yum install -y mysql-connector-java-5.1.25
 
 # Users
 useradd hadoop
@@ -105,6 +106,21 @@ echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /etc/profile
 echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> /etc/profile
 echo "export HADOOP_YARN_HOME=\$HADOOP_HOME" >> /etc/profile
 
+echo "export HIVE_HOME=/kkb/install/hive-1.1.0-cdh5.14.4"  >> /etc/profile
+echo "export PATH=\$PATH:\$HIVE_HOME/bin" >> /etc/profile
+
+# Add Cloudera repo
+
+# pushd /etc/yum.repos.d
+# wget https://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/cloudera-cdh5.repo
+# popd
+
+# Install hive
+
+tar -xzvf /kkb/soft/hive-1.1.0-cdh5.14.4.tar.gz -C /kkb/install/
+mkdir -p /kkb/install/hive-1.1.0-cdh5.14.4/logs/
+chown -R hadoop:hadoop /kkb/install/hive-1.1.0-cdh5.14.4
+
 # Allow SSH to each others
 sudo su hadoop
 mkdir /home/hadoop/.ssh
@@ -124,11 +140,20 @@ chown -R hadoop:hadoop /home/hadoop/.ssh
 cd /efs/hadoop-cluster-on-aws && git pull # Update config files
 
 export cdh=hadoop-2.6.0-cdh5.14.4
-for file in hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml slaves yarn-env.sh fair-scheduler.xml
+for file in slaves hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml yarn-env.sh fair-scheduler.xml
 do
 cp /efs/hadoop-cluster-on-aws/configs/$file /kkb/install/$cdh/etc/hadoop/$file
 done
 chmod 755 /kkb/install/$cdh/etc/hadoop/*.sh
+
+# hive files
+
+for file in hive-env.sh hive-site.xml hive-log4j.properties
+do
+cp /efs/hadoop-cluster-on-aws/configs/$file /kkb/install/hive-1.1.0-cdh5.14.4/conf
+done
+
+chmod 755 /kkb/install/hive-1.1.0-cdh5.14.4/conf/*.sh
 
 EOF
 }
