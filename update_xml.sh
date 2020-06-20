@@ -24,7 +24,7 @@ for host in node01 node02 node03
 do
   update_hadoop_configs $host
 
-  if [$host == 'node02']
+  if [$host == 'node03']
     then update_hive_configs $host
   fi
 done
