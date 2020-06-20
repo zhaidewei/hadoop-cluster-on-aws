@@ -109,8 +109,8 @@ flush privileges;
 
 ```bash
 tar -xzvf hive-1.1.0-cdh5.14.4.tar.gz -C /kkb/install
+cp /kkb/soft/mysql-connector-java-5.1.49.jar /kkb/install/hive-1.1.0-cdh5.14.4/lib/
 ```
-
 
 
 ## SSH from local
@@ -205,3 +205,7 @@ Example:
 34.245.2.180 ip-172-31-12-21.eu-west-1.compute.internal node02
 34.243.129.73 ip-172-31-5-55.eu-west-1.compute.internal node03
 ```
+
+## Lzo compression
+
+Lzo is not be default added to Hadoop, we need to add its jar file to hadoop and hive class path, config core-site.xml file.

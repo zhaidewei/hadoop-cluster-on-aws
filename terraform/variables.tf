@@ -155,5 +155,10 @@ done
 
 chmod 755 /kkb/install/hive-1.1.0-cdh5.14.4/conf/*.sh
 
+# Add lzo jar to class path
+
+cp /efs/hadoop-lzo-0.4.13.jar /kkb/install/$cdh/share/hadoop/common/
+cp /efs/hadoop-lzo-0.4.13.jar /kkb/install/hive-1.1.0-cdh5.14.4/lib/
+
 EOF
 }
