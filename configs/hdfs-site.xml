@@ -51,5 +51,9 @@
 		<name>dfs.blocksize</name>
 		<value>134217728</value>
 	</property>
-</configuration>
 
+	<property>
+		<name>dfs.datanode.max.transfer.threads</name>
+		<value>8192</value>
+	</property>
+</configuration>
