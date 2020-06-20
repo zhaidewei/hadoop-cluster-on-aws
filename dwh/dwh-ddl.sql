@@ -24,10 +24,11 @@ COMMENT '游戏登录登出'
 PARTITIONED BY(part_date DATE)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n'
-STORED AS INPUTFORMAT
-      'com.hadoop.mapred.DeprecatedLzoTextInputFormat'
-    OUTPUTFORMAT
-      'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
+-- STORED AS INPUTFORMAT
+--       'com.hadoop.mapred.DeprecatedLzoTextInputFormat'
+--     OUTPUTFORMAT
+--       'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
+STORED AS orc;
 
 CREATE TABLE IF NOT EXISTS tmp_ods_user_login(
 plat_id            STRING     COMMENT '平台id',

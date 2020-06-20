@@ -9,8 +9,12 @@ LOAD DATA LOCAL INPATH '/kkb/install/hivedatas/ods_user_login.txt' OVERWRITE INT
 
 -- Use LZO as output
 SET hive.exec.compress.output=true;
+
 SET mapreduce.output.fileoutputformat.compress=true;
-set mapred.output.compression.codec=com.hadoop.compression.lzo.LzopCodec;
+SET mapreduce.output.fileoutputformat.compress.codec=com.hadoop.compression.lzo.LzoCodec;
+SET mapred.output.compress=true;
+SET mapred.output.compression.codec=com.hadoop.compression.lzo.LzopCodec;
+
 
 -- From temp table to ods user login table
 INSERT OVERWRITE TABLE ods_user_login PARTITION(part_date)

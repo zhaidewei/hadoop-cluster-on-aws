@@ -139,7 +139,7 @@ chown -R hadoop:hadoop /home/hadoop/.ssh
 
 cd /efs/hadoop-cluster-on-aws && git pull # Update config files
 
-export cdh=hadoop-2.6.0-cdh5.14.4
+#export cdh=hadoop-2.6.0-cdh5.14.4
 for file in slaves hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml yarn-env.sh fair-scheduler.xml
 do
 cp /efs/hadoop-cluster-on-aws/configs/$file /kkb/install/$cdh/etc/hadoop/$file
@@ -157,8 +157,8 @@ chmod 755 /kkb/install/hive-1.1.0-cdh5.14.4/conf/*.sh
 
 # Add lzo jar to class path
 
-cp /efs/hadoop-lzo-0.4.13.jar /kkb/install/$cdh/share/hadoop/common/
-cp /efs/hadoop-lzo-0.4.13.jar /kkb/install/hive-1.1.0-cdh5.14.4/lib/
+cp /efs/hadoop-lzo-0.4.20.jar /kkb/install/$cdh/share/hadoop/common/
+cp /efs/hadoop-lzo-0.4.20.jar /kkb/install/hive-1.1.0-cdh5.14.4/lib/
 
 EOF
 }
