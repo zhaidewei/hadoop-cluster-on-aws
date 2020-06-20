@@ -19,4 +19,4 @@ SET mapred.output.compression.codec=com.hadoop.compression.lzo.LzopCodec;
 -- From temp table to ods user login table
 INSERT OVERWRITE TABLE ods_user_login PARTITION(part_date)
 SELECT plat_id,server_id,channel_id,user_id,role_id,role_name,client_ip,event_time,op_type,online_time,operating_system,operating_version,device_brand,device_type,from_unixtime(event_time,'yyyy-MM-dd') AS part_date
-FROM TMP_ODS_USER_LOGIN;
+FROM tmp_ods_user_login;
