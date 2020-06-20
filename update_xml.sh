@@ -14,7 +14,7 @@ function update_hadoop_configs {
 function update_hive_configs {
   for file in hive-env.sh hive-site.xml hive-log4j.properties
     do
-      cp /kkb/soft/hadoop-cluster-on-aws/configs/$file $1:/kkb/install/$hivehome/conf
+      scp /kkb/soft/hadoop-cluster-on-aws/configs/$file $1:/kkb/install/$hivehome/conf
       echo Updated $file on $1
     done
   chmod 755 /kkb/install/$hivehome/conf/*.sh
