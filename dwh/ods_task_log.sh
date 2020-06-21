@@ -60,7 +60,7 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n'
 STORED AS TEXTFILE;
 
-load data local inpath '/kkb/datas/gamecenter/ods_task_log.txt' overwrite into table tmp_ods_task_log;
+load data local inpath '/kkb/install/hivedatas/ods_task_log.txt' overwrite into table tmp_ods_task_log;
 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nostrict;

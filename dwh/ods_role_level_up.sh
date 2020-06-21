@@ -44,7 +44,7 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n'
 STORED AS TEXTFILE;
 
-load data local inpath '/kkb/datas/gamecenter/ods_role_level_up.txt' overwrite into table tmp_ods_role_level_up;
+load data local inpath '/kkb/install/hivedatas/ods_role_level_up.txt' overwrite into table tmp_ods_role_level_up;
 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nostrict;

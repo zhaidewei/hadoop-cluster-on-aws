@@ -22,7 +22,7 @@ map keys terminated by ':'
 lines terminated by '\n'
 stored as textfile;
 
-load data local inpath '/kkb/datas/gamecenter/ods_dim_game_button.txt' overwrite into table ods_dim_game_button;
+load data local inpath '/kkb/install/hivedatas/ods_dim_game_button.txt' overwrite into table ods_dim_game_button;
 
 
 

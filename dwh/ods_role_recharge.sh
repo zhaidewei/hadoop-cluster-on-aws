@@ -50,7 +50,7 @@ LINES TERMINATED BY '\n'
 STORED AS TEXTFILE;
 
 
-load data local inpath '/kkb/datas/gamecenter/ods_role_recharge.txt' overwrite into table tmp_ods_role_recharge;
+load data local inpath '/kkb/install/hivedatas/ods_role_recharge.txt' overwrite into table tmp_ods_role_recharge;
 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nostrict;

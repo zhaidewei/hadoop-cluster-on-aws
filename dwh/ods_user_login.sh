@@ -58,7 +58,7 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n'
 STORED AS TEXTFILE;
 
-load data local inpath '/kkb/datas/gamecenter/ods_user_login.txt' overwrite into table tmp_ods_user_login;
+load data local inpath '/kkb/install/hivedatas/ods_user_login.txt' overwrite into table tmp_ods_user_login;
 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nostrict;
