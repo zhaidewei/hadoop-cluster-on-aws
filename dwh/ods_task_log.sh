@@ -3,7 +3,7 @@
 
 DBNAME=game_center
 
-hive_home=/kkb/install/hive-1.1.0-cdh5.14.2/bin/hive
+hive_home=/kkb/install/hive-1.1.0-cdh5.14.4/bin/hive
 
 
 sql="

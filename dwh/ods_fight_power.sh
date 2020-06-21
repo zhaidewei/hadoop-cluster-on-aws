@@ -3,7 +3,7 @@
 
 DBNAME=game_center
 
-hive_home=/kkb/install/hive-1.1.0-cdh5.14.2/bin/hive
+hive_home=/kkb/install/hive-1.1.0-cdh5.14.4/bin/hive
 
 
 sql="
@@ -15,10 +15,10 @@ server_id       int        comment '服务器ID  ',
 channel_id      string     comment '渠道ID    ',
 user_id         string     comment '用户ID    ',
 role_id         string     comment '角色ID    ',
-role_name       string     comment '角色名称  ', 
+role_name       string     comment '角色名称  ',
 client_ip       string     comment '客户端IP  ',
-event_time      int        comment '事件时间  ', 
-change_count    bigint     comment '战斗力变化',  
+event_time      int        comment '事件时间  ',
+change_count    bigint     comment '战斗力变化',
 combat_power    bigint     comment '当前战斗力'
 )
 comment '战斗力日志'
@@ -33,10 +33,10 @@ server_id       int        comment '服务器ID  ',
 channel_id      string     comment '渠道ID    ',
 user_id         string     comment '用户ID    ',
 role_id         string     comment '角色ID    ',
-role_name       string     comment '角色名称  ', 
+role_name       string     comment '角色名称  ',
 client_ip       string     comment '客户端IP  ',
-event_time      int        comment '事件时间  ', 
-change_count    bigint     comment '战斗力变化',  
+event_time      int        comment '事件时间  ',
+change_count    bigint     comment '战斗力变化',
 combat_power    bigint     comment '当前战斗力'
 )
 comment '战斗力日志-临时表，用于将数据通过动态分区载入ods_fight_power中'

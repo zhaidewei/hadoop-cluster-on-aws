@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DBNAME=game_center
-hive_home=/kkb/install/hive-1.1.0-cdh5.14.2/bin/hive
+hive_home=/kkb/install/hive-1.1.0-cdh5.14.4/bin/hive
 
 sql="
 create database if not exists  game_center;
@@ -28,10 +28,10 @@ comment '游戏登录登出'
 PARTITIONED BY(part_date date)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n'
-STORED AS INPUTFORMAT 
-      'com.hadoop.mapred.DeprecatedLzoTextInputFormat' 
-    OUTPUTFORMAT 
-      'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'; 
+STORED AS INPUTFORMAT
+      'com.hadoop.mapred.DeprecatedLzoTextInputFormat'
+    OUTPUTFORMAT
+      'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
 
 
 
@@ -60,9 +60,9 @@ STORED AS TEXTFILE;
 
 load data local inpath '/kkb/datas/gamecenter/ods_user_login.txt' overwrite into table tmp_ods_user_login;
 
-set hive.exec.dynamic.partition=true; 
-set hive.exec.dynamic.partition.mode=nostrict; 
-set hive.exec.max.dynamic.partitions.pernode=1000; 
+set hive.exec.dynamic.partition=true;
+set hive.exec.dynamic.partition.mode=nostrict;
+set hive.exec.max.dynamic.partitions.pernode=1000;
 
 SET hive.exec.compress.output=true;
 SET mapreduce.output.fileoutputformat.compress=true;
@@ -70,7 +70,7 @@ set mapred.output.compression.codec=com.hadoop.compression.lzo.LzopCodec;
 
 
 insert overwrite table ods_user_login partition(part_date)
-select plat_id,server_id,channel_id,user_id,role_id,role_name,client_ip,event_time,op_type,online_time,operating_system,operating_version,device_brand,device_type,from_unixtime(event_time,'yyyy-MM-dd') as part_date 
+select plat_id,server_id,channel_id,user_id,role_id,role_name,client_ip,event_time,op_type,online_time,operating_system,operating_version,device_brand,device_type,from_unixtime(event_time,'yyyy-MM-dd') as part_date
 from tmp_ods_user_login;
 
 "
