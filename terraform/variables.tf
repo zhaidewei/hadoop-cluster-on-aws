@@ -160,5 +160,9 @@ chmod 755 /kkb/install/hive-1.1.0-cdh5.14.4/conf/*.sh
 cp /efs/hadoop-lzo-0.4.20.jar /kkb/install/$cdh/share/hadoop/common/
 cp /efs/hadoop-lzo-0.4.20.jar /kkb/install/hive-1.1.0-cdh5.14.4/lib/
 
+# Add missing hadoop native libs
+
+cp /kkb/soft/native/* /kkb/install/$cdh/lib/native
+
 EOF
 }
